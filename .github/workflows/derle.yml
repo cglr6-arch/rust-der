@@ -12,18 +12,21 @@ jobs:
         run: rustup update stable
 
       - name: Cargo Projesini Hazirla ve Paketleri Yukle
-        run:  |
+        run: |
           cargo new otomatik_proje --bin
-          cp main.rs otomatik_proje/src/main.rs
+          copy main.rs otomatik_proje\src\main.rs
           cd otomatik_proje
           cargo add getopts chrono
-        
-      - name: Cargoile Release Olarak Derle
+
+      - name: Cargo ile Release Olarak Derle
         run: |
           cd otomatik_proje
           cargo build --release
-        
-        
+
+      - name: EXE Dosyasini Ana Klasore Tasi
+        run: |
+          copy otomatik_proje\target\release\otomatik_proje.exe programim.exe
+
       - name: EXE Dosyasini Hazirla
         uses: actions/upload-artifact@v4
         with:
