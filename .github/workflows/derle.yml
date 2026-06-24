@@ -10,9 +10,19 @@ jobs:
 
       - name: Rust Kurulumu
         run: rustup update stable
+
+      - name: Cargo Projesini Hazirla ve Paketleri Yukle
+        run:  |
+          cargo new otomatik_proje --bin
+          cp main.rs otomatik_proje/src/main.rs
+          cd otomatik_proje
+          cargo add getopts chrono
         
-      - name: EXE Olarak Derle
-        run: rustc main.rs -o programim.exe
+      - name: Cargoile Release Olarak Derle
+        run: |
+          cd otomatik_proje
+          cargo build --release
+        
         
       - name: EXE Dosyasini Hazirla
         uses: actions/upload-artifact@v4
