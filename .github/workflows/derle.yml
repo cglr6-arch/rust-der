@@ -1,0 +1,21 @@
+name: Rust Windows Derleyici
+on: [push, workflow_dispatch]
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Kodu Klonla
+        uses: actions/checkout@v4
+
+      - name: Rust Kurulumu
+        run: rustup update stable
+        
+      - name: EXE Olarak Derle
+        run: rustc main.rs -o programim.exe
+        
+      - name: EXE Dosyasini Hazirla
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows-programim
+          path: programim.exe
