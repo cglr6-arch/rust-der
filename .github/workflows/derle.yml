@@ -18,7 +18,9 @@ jobs:
           cd otomatik_proje
           cargo add getopts chrono
 
-      - name: Cargo ile Release Olarak Derle
+      - name: Cargo ile Release Olarak Derle (Tum Kitapliklari Icine Gom)
+        env:
+          RUSTFLAGS: -C target-feature=+crt-static
         run: |
           cd otomatik_proje
           cargo build --release
